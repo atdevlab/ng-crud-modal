@@ -1,0 +1,44 @@
+﻿<h1>Users</h1>
+
+<button type="button" id="button" class="btn btn-sm btn-info mb-2 mr-2" style="margin: auto" (click)="openModal()">Add
+    User by Modal
+</button>
+
+<a routerLink="add" class="btn btn-sm btn-info mb-2 mr-2">Add User</a>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th style="width: 30%">Name</th>
+            <th style="width: 30%">Email</th>
+            <th style="width: 30%">Role</th>
+            <th style="width: 10%"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let user of users">
+            <td>{{user.title}} {{user.firstName}} {{user.lastName}}</td>
+            <td>{{user.email}}</td>
+            <td>{{user.role}}</td>
+            <td style="white-space: nowrap">
+                <a class="btn btn-sm btn-primary mr-1" (click)="openModal(user)">Edit by Modal</a>
+                <a routerLink="edit/{{user.id}}" class="btn btn-sm btn-primary mr-1">Edit</a>
+                <button (click)="deleteUser(user.id)" class="btn btn-sm btn-danger btn-delete-user"
+                    [disabled]="user.isDeleting">
+                    <span *ngIf="user.isDeleting" class="spinner-border spinner-border-sm"></span>
+                    <span *ngIf="!user.isDeleting">Delete</span>
+                </button>
+            </td>
+        </tr>
+        <tr *ngIf="!users">
+            <td colspan="4" class="text-center">
+                <span class="spinner-border spinner-border-lg align-center"></span>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+
+<app-modal #modal [modalConfig]="modalConfig">
+    <user-add-edit [user]="user"></user-add-edit>
+</app-modal>
