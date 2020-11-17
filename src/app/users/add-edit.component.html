@@ -88,6 +88,8 @@
             <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
             Save
         </button>
-        <!-- <a routerLink="/users" class="btn btn-link">Cancel</a> -->
+        <div class="float-right">
+            <a routerLink="/users" class="btn btn-secondary" (click)="onClose()">Cancel</a>
+        </div>
     </div>
 </form>

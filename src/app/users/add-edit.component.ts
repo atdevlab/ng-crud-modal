@@ -3,33 +3,44 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 
-import { UserService, AlertService } from '@app/_services';
+import { UserService, AlertService, MessageService } from '@app/_services';
 import { MustMatch } from '@app/_helpers';
+import { Message } from '@app/_models';
 
 @Component({
   selector: 'user-add-edit',
   templateUrl: 'add-edit.component.html',
 })
 export class AddEditComponent implements OnInit {
-  @Input() user;
   form: FormGroup;
-  id: string;
   isAddMode: boolean;
   loading = false;
   submitted = false;
+  user = null;
+  message: Message;
 
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
     private userService: UserService,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private msgSvc: MessageService
   ) {}
 
   ngOnInit() {
-    console.log(this.user);
-    this.id = this.route.snapshot.params.id;
-    this.isAddMode = !this.id;
+    this.initialize();
+    this.msgSvc.receive().subscribe((msg) => {
+      if (msg.header === 'user_data') {
+        this.user = msg.content;
+        this.initialize();
+        console.log(msg);
+      }
+    });
+  }
+
+  initialize(): void {
+    this.isAddMode = !this.user;
 
     // password not required in edit mode
     const passwordValidators = [Validators.minLength(6)];
@@ -63,7 +74,7 @@ export class AddEditComponent implements OnInit {
 
     if (!this.isAddMode) {
       this.userService
-        .getById(this.id)
+        .getById(this.user.id)
         .pipe(first())
         .subscribe((x) => this.form.patchValue(x));
     }
@@ -72,6 +83,10 @@ export class AddEditComponent implements OnInit {
   // convenience getter for easy access to form fields
   get f() {
     return this.form.controls;
+  }
+
+  onClose() {
+    this.msgSvc.send({ header: 'directive', content: 'x' });
   }
 
   onSubmit() {
@@ -102,30 +117,34 @@ export class AddEditComponent implements OnInit {
           this.alertService.success('User added', {
             keepAfterRouteChange: true,
           });
-          this.router.navigate(['../'], { relativeTo: this.route });
+          this.router.navigate(['/users'], { relativeTo: this.route });
+          window.location.reload();
         },
         error: (error) => {
           this.alertService.error(error);
           this.loading = false;
         },
       });
+    this.onClose();
   }
 
   private updateUser() {
     this.userService
-      .update(this.id, this.form.value)
+      .update(this.user.id, this.form.value)
       .pipe(first())
       .subscribe({
         next: () => {
           this.alertService.success('User updated', {
             keepAfterRouteChange: true,
           });
-          this.router.navigate(['../../'], { relativeTo: this.route });
+          this.router.navigate(['/users'], { relativeTo: this.route });
+          window.location.reload();
         },
         error: (error) => {
           this.alertService.error(error);
           this.loading = false;
         },
       });
+    this.onClose();
   }
 }

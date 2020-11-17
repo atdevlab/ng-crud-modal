@@ -1,8 +1,12 @@
 ﻿<h1>Users</h1>
 
-<button type="button" id="button" class="btn btn-sm btn-info mb-2 mr-2" style="margin: auto" (click)="openModal()">Add
+<button type="button" id="button" class="btn btn-sm btn-info mb-2 mr-2" style="margin: auto" (click)="onModal(null)">Add
     User by Modal
 </button>
+<!-- <button type="button" id="button" class="btn btn-sm btn-info mb-2 mr-2" style="margin: auto"
+    (click)="openModal(null)">Add
+    User by Modal
+</button> -->
 
 <a routerLink="add" class="btn btn-sm btn-info mb-2 mr-2">Add User</a>
 
@@ -21,7 +25,7 @@
             <td>{{user.email}}</td>
             <td>{{user.role}}</td>
             <td style="white-space: nowrap">
-                <a class="btn btn-sm btn-primary mr-1" (click)="openModal(user)">Edit by Modal</a>
+                <a class="btn btn-sm btn-primary mr-1" (click)="onModal(user)">Edit by Modal</a>
                 <a routerLink="edit/{{user.id}}" class="btn btn-sm btn-primary mr-1">Edit</a>
                 <button (click)="deleteUser(user.id)" class="btn btn-sm btn-danger btn-delete-user"
                     [disabled]="user.isDeleting">
@@ -40,5 +44,5 @@
 
 
 <app-modal #modal [modalConfig]="modalConfig">
-    <user-add-edit [user]="user"></user-add-edit>
+    <user-add-edit></user-add-edit>
 </app-modal>
