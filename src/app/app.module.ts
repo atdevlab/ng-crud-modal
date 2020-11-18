@@ -11,9 +11,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AlertComponent, ModalComponent } from './_components';
 import { HomeComponent } from './home';
+import { PushPlusComponent } from './push-plus';
 
 @NgModule({
-  declarations: [AppComponent, AlertComponent, HomeComponent],
+  declarations: [
+    AppComponent,
+    AlertComponent,
+    HomeComponent,
+    PushPlusComponent,
+  ],
   imports: [
     BrowserModule,
     ReactiveFormsModule,
