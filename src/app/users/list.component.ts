@@ -2,7 +2,7 @@
 import { first } from 'rxjs/operators';
 
 import { MessageService, UserService } from '@app/_services';
-import { ModalComponent, ModalConfig } from '@app/_components';
+import { ModalComponent, ModalConfig } from '@app/shared';
 import { Message, Header } from '@app/_models';
 @Component({ templateUrl: 'list.component.html' })
 export class ListComponent implements OnInit {

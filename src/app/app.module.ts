@@ -9,7 +9,7 @@ import { fakeBackendProvider } from './_helpers';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AlertComponent, ModalComponent } from './_components';
+import { AlertComponent, ModalComponent } from './shared';
 import { HomeComponent } from './home';
 import { PushPlusComponent } from './push-plus';
 
