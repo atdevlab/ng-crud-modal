@@ -1,9 +1,9 @@
 ﻿import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { first } from 'rxjs/operators';
 
-import { MessageService, UserService } from '@app/_services';
+import { MessageService, UserService } from '@app/core/services';
 import { ModalComponent, ModalConfig } from '@app/shared';
-import { Message, Header } from '@app/_models';
+import { Message, Header } from '@app/core/models';
 @Component({ templateUrl: 'list.component.html' })
 export class ListComponent implements OnInit {
   users = null;

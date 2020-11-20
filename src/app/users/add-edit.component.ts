@@ -3,9 +3,9 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 
-import { UserService, AlertService, MessageService } from '@app/_services';
-import { MustMatch } from '@app/_helpers';
-import { Message } from '@app/_models';
+import { UserService, AlertService, MessageService } from '@app/core/services';
+import { MustMatch } from '@app/core/helpers';
+import { Message } from '@app/core/models';
 
 @Component({
   selector: 'user-add-edit',

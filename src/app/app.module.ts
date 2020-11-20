@@ -1,37 +1,17 @@
 ﻿import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
-// used to create fake backend
-import { fakeBackendProvider } from './_helpers';
 
 import { AppRoutingModule } from './app-routing.module';
+import { CoreModule } from './core/core.module';
+import { SharedModule } from './shared';
+
 import { AppComponent } from './app.component';
-import { AlertComponent, ModalComponent } from './shared';
 import { HomeComponent } from './home';
 import { PushPlusComponent } from './push-plus';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    AlertComponent,
-    HomeComponent,
-    PushPlusComponent,
-  ],
-  imports: [
-    BrowserModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    AppRoutingModule,
-    NgbModule,
-  ],
-  entryComponents: [ModalComponent],
-  providers: [
-    // provider used to create fake backend
-    fakeBackendProvider,
-  ],
+  declarations: [AppComponent, HomeComponent, PushPlusComponent],
+  imports: [BrowserModule, AppRoutingModule, CoreModule, SharedModule],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -10,7 +10,7 @@ import {
 import { Observable, of, throwError } from 'rxjs';
 import { delay, materialize, dematerialize } from 'rxjs/operators';
 
-import { Role } from '@app/_models';
+import { Role } from '@app/core/models';
 
 // array in local storage for registered users
 const usersKey = 'angular-master-details-crud-example-users';
