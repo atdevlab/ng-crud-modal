@@ -4,12 +4,15 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home';
 import { PushPlusComponent } from './push-plus';
 
+const usersModule = () =>
+  import('./users/users.module').then((m) => m.UsersModule);
+
 const routes: Routes = [
   { path: '', component: HomeComponent },
 
   {
     path: 'users',
-    loadChildren: './users/users.module#UsersModule',
+    loadChildren: usersModule,
   },
 
   { path: 'push-plus', component: PushPlusComponent },

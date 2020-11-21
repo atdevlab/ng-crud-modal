@@ -3,8 +3,8 @@ import { first } from 'rxjs/operators';
 
 import { MessageService, UserService } from '@app/core/services';
 import { ModalComponent, ModalConfig } from '@app/shared';
-import { Message, Header } from '@app/core/models';
-@Component({ templateUrl: 'list.component.html' })
+
+@Component({ selector: 'user-list', templateUrl: 'list.component.html' })
 export class ListComponent implements OnInit {
   users = null;
   user = null;
